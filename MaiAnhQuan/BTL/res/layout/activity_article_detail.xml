@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Toolbar with back button -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#00BCD4"
+        android:elevation="4dp">
+
+        <!-- Back button -->
+        <ImageView
+            android:id="@+id/back_button"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="start"
+            android:src="@android:drawable/ic_menu_close_clear_cancel"
+            android:contentDescription="Back"
+            android:layout_marginStart="16dp"
+            android:clickable="true"
+            android:focusable="true" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <!-- Image of the article -->
+    <ImageView
+        android:id="@+id/article_detail_image"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:src="@drawable/img" /> <!-- Placeholder image -->
+
+    <!-- Article Title -->
+    <TextView
+        android:id="@+id/article_detail_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Article Title"
+        android:textSize="24sp"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="16dp" />
+
+    <!-- Article Description -->
+    <TextView
+        android:id="@+id/article_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Article full time..."
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="8dp" />
+
+    <!-- Time ago -->
+    <TextView
+        android:id="@+id/article_detail_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="1 minute ago"
+        android:textSize="14sp"
+        android:textColor="@android:color/darker_gray"
+        android:layout_marginTop="8dp" />
+
+    <!-- Article Full Content -->
+    <TextView
+        android:id="@+id/article_detail_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Full content of the article..."
+        android:textSize="14sp"
+        android:textColor="@android:color/black"
+        android:layout_marginTop="16dp" />
+</LinearLayout>
