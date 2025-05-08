@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <!-- Thanh tab trên cùng -->
+    <LinearLayout
+        android:id="@+id/topBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="@color/teal_700"
+        android:orientation="horizontal"
+        android:padding="8dp"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Icon Menu -->
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_menu"
+            android:contentDescription="Menu"
+            android:layout_marginEnd="12dp"/>
+
+        <!-- Tab: Nóng -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/tab_nong"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Nóng"
+                android:textColor="@android:color/white"
+                android:textStyle="bold"
+                android:paddingHorizontal="8dp"
+                android:layout_marginEnd="12dp" />
+
+            <View
+                android:layout_width="50dp"
+                android:layout_height="2dp"
+                android:background="@android:color/white" />
+        </LinearLayout>
+
+        <!-- Tab: Mới -->
+        <TextView
+            android:id="@+id/tab_moi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mới"
+            android:textColor="@android:color/white"
+            android:paddingHorizontal="8dp"
+            android:layout_marginEnd="12dp"/>
+
+        <!-- Tab: Bóng đá VN -->
+        <TextView
+            android:id="@+id/tab_bdvn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bóng đá VN"
+            android:textColor="@android:color/white"
+            android:paddingHorizontal="8dp"
+            android:layout_marginEnd="12dp"/>
+
+        <!-- Tab: Bóng -->
+        <TextView
+            android:id="@+id/tab_bong"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Bóng"
+            android:textColor="@android:color/white"
+            android:paddingHorizontal="8dp"
+            android:layout_marginEnd="12dp"/>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
+
+        <!-- Search Icon -->
+        <ImageView
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_search"
+            android:contentDescription="Search"
+            android:layout_marginEnd="12dp"/>
+
+        <!-- Avatar -->
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_avatar"
+            android:contentDescription="User"
+            android:background="@drawable/circle_bg"
+            android:scaleType="centerCrop"/>
+    </LinearLayout>
+
+    <!-- RecyclerView nội dung -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewPosts"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:padding="8dp"
+        app:layout_constraintTop_toBottomOf="@id/topBar"
+        app:layout_constraintBottom_toTopOf="@id/bottomBar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <!-- Thanh dưới cùng giống ảnh -->
+    <LinearLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:padding="8dp"
+        android:background="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <!-- Tin tức -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_news_active"
+                app:tint="@color/teal_700"/>
+
+            <TextView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:text="Tin tức"
+                android:textColor="@color/teal_700"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+        <!-- Video -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_video"
+                app:tint="@android:color/darker_gray"/>
+
+            <TextView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:text="Video"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+        <!-- Xu hướng -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_trend"
+                app:tint="@android:color/darker_gray"/>
+
+            <TextView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:text="Xu hướng"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="12sp"/>
+        </LinearLayout>
+
+        <!-- Tiện ích -->
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_tools"
+                app:tint="@android:color/darker_gray"/>
+
+            <TextView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:text="Tiện ích"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="12sp"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
