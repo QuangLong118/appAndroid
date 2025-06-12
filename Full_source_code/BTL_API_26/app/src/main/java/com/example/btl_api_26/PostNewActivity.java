@@ -1,21 +1,28 @@
 package com.example.btl_api_26;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
+import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+
+
+import retrofit2.Response;
+
+
 
 public class PostNewActivity extends AppCompatActivity {
     private RecyclerView recyclerViewPosts;
@@ -25,95 +32,57 @@ public class PostNewActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.new_posts);
+        setContentView(R.layout.activity_post_new);
 
         recyclerViewPosts = findViewById(R.id.recyclerViewPosts);
         recyclerViewPosts.setLayoutManager(new LinearLayoutManager(this));
 
-        // Dữ liệu mẫu
-        List<Post> posts = new ArrayList<>();
-        posts.add(new Post(
-                "https://photo-baomoi.bmcdn.me/w1000_r1/2025_04_23_114_52056754/bf82a5e7f7a91ef747b8.jpg",
-                "Lỗi xương ống tai khiến người phụ nữ suy giảm thính lực",
-                "<p>Nội dung</p>",
-                "11/08/2003 11:05:05",
-                125,
-                "vi",
-                "sức khỏe"
-        ));
-        posts.add(new Post(
-                "https://photo-baomoi.bmcdn.me/w1000_r1/2025_04_23_114_52056754/bf82a5e7f7a91ef747b8.jpg",
-                "Lỗi xương ống tai khiến người phụ nữ suy giảm thính lực",
-                "<p>Nội dung</p>",
-                "11/08/2003 11:05:05",
-                125,
-                "vi",
-                "sức khỏe"
-        ));
-        posts.add(new Post(
-                "https://photo-baomoi.bmcdn.me/w1000_r1/2025_04_23_114_52056754/bf82a5e7f7a91ef747b8.jpg",
-                "Lỗi xương ống tai khiến người phụ nữ suy giảm thính lực",
-                "<p>Nội dung</p>",
-                "11/08/2003 11:05:05",
-                125,
-                "vi",
-                "sức khỏe"
-        ));
-        posts.add(new Post(
-                "https://photo-baomoi.bmcdn.me/w1000_r1/2025_04_23_114_52056754/bf82a5e7f7a91ef747b8.jpg",
-                "Lỗi xương ống tai khiến người phụ nữ suy giảm thính lực",
-                "<p>Nội dung</p>",
-                "11/08/2003 11:05:05",
-                125,
-                "vi",
-                "sức khỏe"
-        ));
-        posts.add(new Post(
-                "https://photo-baomoi.bmcdn.me/w1000_r1/2025_04_23_114_52056754/bf82a5e7f7a91ef747b8.jpg",
-                "Lỗi xương ống tai khiến người phụ nữ suy giảm thính lực",
-                "<p>Nội dung</p>",
-                "11/08/2003 11:05:05",
-                125,
-                "vi",
-                "sức khỏe"
-        ));
-        posts.add(new Post(
-                "https://photo-baomoi.bmcdn.me/w1000_r1/2025_04_23_114_52056754/bf82a5e7f7a91ef747b8.jpg",
-                "Lỗi xương ống tai khiến người phụ nữ suy giảm thính lực",
-                "<p>Nội dung</p>",
-                "11/08/2003 11:05:05",
-                125,
-                "vi",
-                "sức khỏe"
-        ));
-        posts.add(new Post(
-                "https://photo-baomoi.bmcdn.me/w1000_r1/2025_04_23_114_52056754/bf82a5e7f7a91ef747b8.jpg",
-                "Lỗi xương ống tai khiến người phụ nữ suy giảm thính lực",
-                "<p>Nội dung</p>",
-                "11/08/2003 11:05:05",
-                125,
-                "vi",
-                "sức khỏe"
-        ));
-        posts.add(new Post(
-                "https://photo-baomoi.bmcdn.me/w1000_r1/2025_04_23_114_52056754/bf82a5e7f7a91ef747b8.jpg",
-                "Lỗi xương ống tai khiến người phụ nữ suy giảm thính lực",
-                "<p>Nội dung</p>",
-                "11/08/2003 11:05:05",
-                125,
-                "vi",
-                "sức khỏe"
-        ));
-        posts.add(new Post(
-                "https://photo-baomoi.bmcdn.me/w1000_r1/2025_04_23_114_52056754/bf82a5e7f7a91ef747b8.jpg",
-                "Lỗi xương ống tai khiến người phụ nữ suy giảm thính lực",
-                "<p>Nội dung</p>",
-                "11/08/2003 11:05:05",
-                125,
-                "vi",
-                "sức khỏe"
-        ));
-        postNewApdater = new PostNewAdapter(this, posts);
-        recyclerViewPosts.setAdapter(postNewApdater);
+        TextView newHot = findViewById(R.id.tab_nong);
+        newHot.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(PostNewActivity.this, MainActivity.class);
+                startActivity(intent);
+            }
+        });
+        loadPostsFromApi();
+    }
+    private void loadPostsFromApi() {
+        PostApi api = RetrofitClient.getRetrofitInstance().create(PostApi.class);
+        Call<List<Post>> call = api.getPosts();
+        call.enqueue(new Callback<List<Post>>() {
+            @Override
+            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<Post> posts = response.body();
+                    for (Post post : posts){
+
+                        post.update();
+                        Log.d("duonglong",post.getContent());
+                    }
+
+
+                    postNewApdater = new PostNewAdapter(PostNewActivity.this, posts, post -> {
+                        Intent intent = new Intent(PostNewActivity.this, PostDetailActivity.class);
+                        intent.putExtra("title", post.getTitle());
+                        intent.putExtra("content", post.getContent());
+                        intent.putExtra("image", post.getImage());
+                        intent.putExtra("date", post.getFormattedCreateAt());
+                        startActivity(intent);
+                    });
+                    recyclerViewPosts.setAdapter(postNewApdater);
+
+                    Toast.makeText(PostNewActivity.this, "Láy dữ liệu thành công!",Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(PostNewActivity.this, "Lỗi khi lấy dữ liệu!", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Post>> call, Throwable t) {
+                Log.e("API_ERROR", "Lỗi kết nối: " + t.getMessage(), t);
+                Toast.makeText(PostNewActivity.this, "Không thể kết nối API!", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }
